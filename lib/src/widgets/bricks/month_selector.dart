@@ -11,8 +11,8 @@ class MonthSelectorAndDoubleIndicator extends StatelessWidget {
     this.nextMonth,
     this.style,
     this.doubleMonth = true,
-  })  : assert(doubleMonth ? nextMonth != null : true),
-        super(key: key);
+  }) : assert(doubleMonth ? nextMonth != null : true),
+       super(key: key);
 
   /// The current month displayed.
   final DateTime currentMonth;
@@ -36,14 +36,10 @@ class MonthSelectorAndDoubleIndicator extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        IconButton(
-          onPressed: onPrevious,
-          splashRadius: 16,
-          icon: const Icon(Icons.keyboard_arrow_left),
-        ),
+        IconButton(onPressed: onPrevious, splashRadius: 16, icon: const Icon(Icons.keyboard_arrow_left)),
         Expanded(
           child: Text(
-            DateFormat.yMMM().format(currentMonth),
+            DateFormat.yMMM(Localizations.localeOf(context).languageCode).format(currentMonth),
             textAlign: TextAlign.center,
             style: style,
           ),
@@ -52,17 +48,13 @@ class MonthSelectorAndDoubleIndicator extends StatelessWidget {
           const SizedBox(width: 16),
           Expanded(
             child: Text(
-              DateFormat.yMMM().format(nextMonth!),
+              DateFormat.yMMM(Localizations.localeOf(context).languageCode).format(nextMonth!),
               textAlign: TextAlign.center,
               style: style,
             ),
           ),
         ],
-        IconButton(
-          splashRadius: 16,
-          onPressed: onNext,
-          icon: const Icon(Icons.keyboard_arrow_right),
-        ),
+        IconButton(splashRadius: 16, onPressed: onNext, icon: const Icon(Icons.keyboard_arrow_right)),
       ],
     );
   }

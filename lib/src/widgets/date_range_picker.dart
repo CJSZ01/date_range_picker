@@ -54,10 +54,8 @@ Widget kDayTileBuilder(
     value: dayModel.date,
     onTap: dayModel.isSelectable ? onTap : null,
     radius: BorderRadius.horizontal(
-      left: Radius.circular(
-          dayModel.isEnd && dayModel.isInRange ? 0 : theme.radius),
-      right: Radius.circular(
-          dayModel.isStart && dayModel.isInRange ? 0 : theme.radius),
+      left: Radius.circular(dayModel.isEnd && dayModel.isInRange ? 0 : theme.radius),
+      right: Radius.circular(dayModel.isStart && dayModel.isInRange ? 0 : theme.radius),
     ),
     backgroundRadius: BorderRadius.horizontal(
       left: Radius.circular(dayModel.isStart ? theme.radius : 0),
@@ -75,7 +73,7 @@ class DayNamesRow extends StatelessWidget {
   /// * [lengthOfDateName] - The length of the date name to display. Defaults to 3 (e.g., "Mon").
   /// * [firstDayOfWeek] - The first day of the week, where 0 is Sunday and 6 is Saturday. Defaults to 0.
   /// * [weekDays] - The names of the days of the week to display. If null, defaults to the default week days.
-  DayNamesRow({
+  const DayNamesRow({
     Key? key,
     required this.textStyle,
     this.weekDays,
@@ -91,9 +89,7 @@ class DayNamesRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var finalWeekDays = (weekDays ??
-            defaultWeekDays(
-                lengthOfDateNames: lengthOfDateName,
-                locale: Localizations.localeOf(context).languageCode))
+            defaultWeekDays(lengthOfDateNames: lengthOfDateName, locale: Localizations.localeOf(context).languageCode))
         .shiftBy(firstDayOfWeek);
 
     return Row(
@@ -230,9 +226,7 @@ class DateRangePickerWidgetState extends State<DateRangePickerWidget> {
 
   late final calendarController = CalendarWidgetController(
     controller: controller,
-    currentMonth: widget.initialDisplayedDate ??
-        widget.initialDateRange?.start ??
-        DateTime.now(),
+    currentMonth: widget.initialDisplayedDate ?? widget.initialDateRange?.start ?? DateTime.now(),
   );
 
   late final StreamSubscription subscription;
@@ -278,8 +272,7 @@ class DateRangePickerWidgetState extends State<DateRangePickerWidget> {
                 theme: widget.theme,
                 onDateChanged: calendarController.onDateChanged,
                 days: calendarController.retrieveDatesForMonth(),
-                delta: calendarController
-                    .retrieveDeltaForMonth(widget.firstDayOfWeek),
+                delta: calendarController.retrieveDeltaForMonth(widget.firstDayOfWeek),
                 firstDayOfWeek: widget.firstDayOfWeek,
                 lengthOfDateName: widget.lengthOfDateName,
               ),
@@ -293,8 +286,7 @@ class DateRangePickerWidgetState extends State<DateRangePickerWidget> {
                   theme: widget.theme,
                   onDateChanged: calendarController.onDateChanged,
                   days: calendarController.retrieveDatesForNextMonth(),
-                  delta: calendarController
-                      .retrieveDeltaForNextMonth(widget.firstDayOfWeek),
+                  delta: calendarController.retrieveDeltaForNextMonth(widget.firstDayOfWeek),
                   firstDayOfWeek: widget.firstDayOfWeek,
                   lengthOfDateName: widget.lengthOfDateName,
                 ),
